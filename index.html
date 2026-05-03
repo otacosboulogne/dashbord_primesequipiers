@@ -813,9 +813,9 @@
     }
 
     if(VIEW_MODE === 'manager'){
-      qs('adminBtn').addEventListener('click', () => {
-        if(adminToken) showAdminModal(); else showLoginModal();
-      });
+      // qs('adminBtn').addEventListener('click', () => {
+      //   if(adminToken) showAdminModal(); else showLoginModal();
+      // });
       qs('cancelLoginBtn').addEventListener('click', hideLoginModal);
       qs('confirmLoginBtn').addEventListener('click', tryLogin);
       qs('adminPwd').addEventListener('keydown', e=>{ if(e.key==='Enter') tryLogin(); });
