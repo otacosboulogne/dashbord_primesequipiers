@@ -713,7 +713,6 @@
         <div class="error-meta" style="margin-top:8px">
           CA perdu estimé : <b>${Number(e.caPerdu || 0).toFixed(2)} €</b>
           <br>
-          Montant saisi masqué dans le classement.
         </div>
       </div>
     `).join("");
@@ -733,22 +732,23 @@
   }
 
   function formatDate(dateStr){
-    if(!dateStr) return "";
+  if(!dateStr) return "";
 
-    const str = String(dateStr).trim();
+  const str = String(dateStr);
 
-    if(/^\d{4}-\d{2}-\d{2}/.test(str)){
-      return `${str.substring(8,10)}/${str.substring(5,7)}/${str.substring(0,4)}`;
-    }
-
-    const d = new Date(str);
-
-    if(!isNaN(d.getTime())){
-      return `${String(d.getDate()).padStart(2,"0")}/${String(d.getMonth()+1).padStart(2,"0")}/${d.getFullYear()}`;
-    }
-
-    return str;
+  // Cas "Thu Jun 18"
+  const d = new Date(str);
+  if(!isNaN(d.getTime())){
+    return `${String(d.getDate()).padStart(2,"0")}/${String(d.getMonth()+1).padStart(2,"0")}`;
   }
+
+  // Cas "2026-06-18"
+  if(/^\d{4}-\d{2}-\d{2}/.test(str)){
+    return `${str.substring(8,10)}/${str.substring(5,7)}`;
+  }
+
+  return str;
+}
 
   function escapeHtml(str){
     return String(str || "")
